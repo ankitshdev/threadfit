@@ -242,6 +242,24 @@
     .works { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 28px; padding: 28px 0 8px; color: var(--faint); font-size: 14px; }
     .works b { color: var(--muted); font-size: 17px; font-weight: 700; letter-spacing: -.01em; }
 
+    /* ---- Why Reddit */
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .why-card { position: relative; padding: 26px 24px; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+    .why-card::before { content: ''; position: absolute; inset: 0 0 auto; height: 2px; background: linear-gradient(90deg, var(--accent), transparent 70%); }
+    .why-n { display: block; margin-bottom: 18px; color: var(--accent); font-size: 32px; font-weight: 800; letter-spacing: -.04em; line-height: 1; }
+    .why-card h3 { font-size: 17px; }
+    .why-card p { margin: 8px 0 0; color: var(--muted); font-size: 14.5px; }
+
+    /* ---- Founder note */
+    .founder { max-width: 760px; margin: 0 auto; padding: 40px 44px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+    .founder blockquote { margin: 0; }
+    .founder blockquote p { margin: 0 0 14px; color: var(--text); font-size: 18px; line-height: 1.65; letter-spacing: -.01em; }
+    .founder blockquote p:first-child::before { content: '\201C'; display: block; height: 34px; margin-bottom: 6px; color: var(--accent); font-size: 64px; font-weight: 800; line-height: 1; }
+    .founder figcaption { display: flex; align-items: center; gap: 12px; margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+    .founder figcaption b { display: block; color: var(--text); font-size: 15px; font-weight: 600; }
+    .founder figcaption a { color: inherit; }
+    .founder-av { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: var(--on-accent); font-weight: 700; }
+
     /* ---- Features */
     .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .feature { padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); transition: border-color .15s; }
@@ -333,6 +351,7 @@
     @media (max-width: 960px) {
       .nav-links { display: none; }
       .grid, .steps, .privacy { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
       .aud { grid-template-columns: 1fr 1fr; }
       .safe { grid-template-columns: 1fr; gap: 28px; }
       .split { grid-template-columns: 1fr 400px; }
@@ -346,6 +365,8 @@
       .compare th, .compare td { padding: 10px; }
       .nav .btn { display: none; }
       .final .box { padding: 48px 20px; }
+      .founder { padding: 28px 22px; }
+      .founder blockquote p { font-size: 16px; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     .nav .btn { border-radius: 999px; }
@@ -484,6 +505,18 @@ Disclosure, I make Acme Invoice, which sends those reminders for you. Happy to a
 
   <div class="works wrap" aria-label="AI services">Works with your own key from <b>Google Gemini</b><b>Groq</b><b>Anthropic Claude</b></div>
 
+  <!-- Why Reddit -->
+  <section class="section alt" id="why">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">Why Reddit</div><h2>Your customers are already asking</h2><p>Reddit is where people go when they have a real problem and want an honest answer.</p></div>
+      <div class="why-grid">
+        <div class="why-card"><span class="why-n">01</span><h3>Customers ask there directly</h3><p>People with a real problem post it on Reddit and ask what to use. No ad needed to find them.</p></div>
+        <div class="why-card"><span class="why-n">02</span><h3>Google and AI read it</h3><p>Reddit threads rank in Google and show up in AI answers, long after they're posted.</p></div>
+        <div class="why-card"><span class="why-n">03</span><h3>They're ready to buy</h3><p>Someone asking for a recommendation is choosing right now, so a helpful reply reaches them at the best moment.</p></div>
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
   <section class="section" id="features">
     <div class="wrap">
@@ -590,6 +623,20 @@ Disclosure, I make Acme Invoice, which sends those reminders for you. Happy to a
         <div><h3>Your own Reddit tab</h3><p>It reads Reddit from your open reddit.com tab, like the page itself does. It never sees your password.</p></div>
         <div><h3>Your choice of AI</h3><p>Reddit text, and during setup your website's text, goes only to the AI service you pick, with your own key. <a href="privacy.html">Read the privacy policy →</a></p></div>
       </div>
+    </div>
+  </section>
+
+  <!-- Founder note -->
+  <section class="section" id="story">
+    <div class="wrap">
+      <figure class="founder">
+        <div class="eyebrow">Why I built ThreadFit</div>
+        <blockquote>
+          <p>I built ThreadFit because Reddit is where customers actually show up. People with a real problem don't search for ads, they ask Reddit: "what do you use for this?" Those threads rank on Google and get quoted in AI answers for years. And someone asking for a recommendation is already halfway to buying.</p>
+          <p>The hard part was never knowing that. It was finding those threads in time, and replying without sounding like a spammer. So I built a tool that finds them, tells me why each one fits, and helps me write a reply I'd be happy to post under my own name.</p>
+        </blockquote>
+        <figcaption><span class="founder-av" aria-hidden="true">A</span><span><b>Ankit</b>Founder of ThreadFit and <a href="https://overbid.in">overbid.in</a></span></figcaption>
+      </figure>
     </div>
   </section>
 
