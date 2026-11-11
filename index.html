@@ -390,6 +390,21 @@
     @keyframes rise { from { opacity: 0; transform: translateY(16px); } }
     .nav .btn { border-radius: 999px; }
     @media (max-width: 640px) { .micro { gap: 4px 14px; } .micro span + span::before { content: none; } }
+    /* Demo scenes: each tab plays a short scene when it opens; with reduced motion it's shown as is. */
+    .anim .pop { animation: demo-pop .5s cubic-bezier(.2, .8, .2, 1) both; animation-delay: var(--d, 0ms); }
+    @keyframes demo-pop { from { opacity: 0; transform: translateY(10px) scale(.98); } }
+    .anim [data-pane]:not([hidden]) { animation: demo-fade .35s ease both; }
+    @keyframes demo-fade { from { opacity: 0; } }
+    .track i { transition: width .9s cubic-bezier(.2, .8, .2, 1); }
+    .mood.grow { animation: demo-wipe 1s cubic-bezier(.2, .8, .2, 1) .3s both; }
+    @keyframes demo-wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+    .typing::after { content: ''; display: inline-block; width: 1.5px; height: 1em; margin-left: 1px; vertical-align: -2px; background: var(--accent); animation: demo-caret .8s steps(1) infinite; }
+    @keyframes demo-caret { 50% { opacity: 0; } }
+    .p-btn { transition: transform .15s, filter .15s; }
+    .p-btn.pressed { transform: scale(.94); filter: brightness(.92); }
+    .badge.counting { font-variant-numeric: tabular-nums; }
+    .post.scan { animation: demo-scan 1.2s ease both; }
+    @keyframes demo-scan { 0%, 100% { background: transparent; } 40% { background: color-mix(in srgb, var(--accent) 12%, transparent); } }
   </style>
 </head>
 <body>
@@ -710,11 +725,123 @@ Disclosure, I make Acme Invoice, which sends those reminders for you. Happy to a
     document.getElementById('get-note').hidden = true;
   }
 
+  // Demo scenes: each tab plays a short scene when it opens: a scan, scores counting up, replies typing out.
+  // A newer scene cancels the one still running. Nothing moves for anyone who asks for less motion.
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!still) document.querySelector('.panel').classList.add('anim');
+  let scene = 0;
+  const later = (run, ms) => new Promise((resolve) => setTimeout(() => resolve(run === scene), ms));
+  const pop = (els, gap = 110, start = 0) => [...els].forEach((el, i) => {
+    el.classList.remove('pop'); void el.offsetWidth; el.style.setProperty('--d', `${start + i * gap}ms`); el.classList.add('pop');
+  });
+  const count = (el, ms = 900) => {
+    el.dataset.full ??= el.textContent;
+    const [, words, n] = el.dataset.full.match(/^(.*?)(\d+)$/) || [];
+    if (!n) return;
+    const run = scene;
+    const t0 = performance.now();
+    el.classList.add('counting');
+    const step = () => {
+      if (run !== scene) { el.textContent = el.dataset.full; return; }
+      const p = Math.min(1, (performance.now() - t0) / ms);
+      el.textContent = words + Math.round(Number(n) * (1 - (1 - p) ** 3));
+      if (p < 1) setTimeout(step, 30);
+    };
+    step();
+  };
+  const type = async (el, run, ms) => {
+    const box = el.tagName === 'TEXTAREA';
+    el.dataset.full ??= box ? el.value : el.textContent;
+    const full = el.dataset.full;
+    const set = (s) => { if (box) el.value = s; else el.textContent = s; };
+    const done = () => { set(full); el.classList.remove('typing'); if (box) el.scrollTop = 0; };
+    set('');
+    el.classList.add('typing');
+    const each = Math.max(8, ms / full.length);
+    for (let i = 2; i <= full.length; i += 2) {
+      if (!(await later(run, each * 2))) { done(); return false; }
+      set(full.slice(0, i));
+      if (box) el.scrollTop = el.scrollHeight;
+    }
+    done();
+    return true;
+  };
+  const pane = (view) => document.querySelector(`[data-pane="${view}"]`);
+  const scenes = {
+    async threads(run) {
+      const p = pane('threads');
+      const button = document.getElementById('demo-scan');
+      const status = document.getElementById('demo-status');
+      const hide = p.querySelectorAll('.card, .p-filters span');
+      hide.forEach((el) => { el.style.opacity = '0'; });
+      button.classList.add('pressed');
+      button.textContent = 'Reading…';
+      document.querySelectorAll('.page .post').forEach((post, i) => {
+        post.classList.remove('scan'); void post.offsetWidth; post.style.animationDelay = `${i * 180}ms`; post.classList.add('scan');
+      });
+      for (let i = 1; i <= 24; i += 3) { status.textContent = `Reading r/freelance (${i} of 24)…`; if (!(await later(run, 70))) break; }
+      button.classList.remove('pressed');
+      button.textContent = 'Find threads';
+      status.textContent = '14 threads worth a look, from 312 new posts';
+      hide.forEach((el) => { el.style.opacity = ''; });
+      if (run !== scene) return;
+      pop(p.querySelectorAll('.p-filters span'), 60);
+      pop(p.querySelectorAll('.card'), 160, 150);
+      p.querySelectorAll('.badge').forEach((b) => count(b));
+      if (!(await later(run, 700))) return;
+      await type(p.querySelector('textarea'), run, 1800);
+    },
+    async search(run) {
+      const p = pane('search');
+      const cards = p.querySelectorAll('.card');
+      const button = p.querySelector('.p-btn');
+      cards.forEach((c) => { c.style.opacity = '0'; });
+      const typed = await type(p.querySelector('.search span'), run, 700);
+      cards.forEach((c) => { c.style.opacity = ''; });
+      if (!typed) return;
+      button.classList.add('pressed');
+      await later(run, 160);
+      button.classList.remove('pressed');
+      if (run !== scene) return;
+      pop(cards, 160);
+      p.querySelectorAll('.badge').forEach((b) => count(b, 800));
+    },
+    async mentions() {
+      const p = pane('mentions');
+      pop(p.querySelectorAll('.card'), 200);
+      const bars = p.querySelectorAll('.track i');
+      bars.forEach((bar) => { bar.dataset.w ??= bar.style.width; bar.style.transition = 'none'; bar.style.width = '0'; });
+      void p.offsetWidth;
+      bars.forEach((bar, i) => { bar.style.transition = ''; bar.style.transitionDelay = `${150 + i * 120}ms`; bar.style.width = bar.dataset.w; });
+      p.querySelectorAll('.bar-row b').forEach((b) => count(b, 900));
+      const mood = p.querySelector('.mood');
+      mood.classList.remove('grow'); void mood.offsetWidth; mood.classList.add('grow');
+      pop(p.querySelectorAll('.key span, .tag'), 70, 500);
+    },
+    async post() {
+      const p = pane('post');
+      pop(p.querySelectorAll('.card'), 180);
+      pop(p.querySelectorAll('.fit'), 180, 300);
+    },
+    async mine(run) {
+      const p = pane('mine');
+      const replies = p.querySelectorAll('.comment .r');
+      const fill = () => replies.forEach((r) => { r.textContent = r.dataset.full; r.classList.remove('typing'); });
+      replies.forEach((r) => { r.dataset.full ??= r.textContent; r.textContent = ''; });
+      pop(p.querySelectorAll('.card'));
+      pop(p.querySelectorAll('.comment'), 450, 250);
+      if (!(await later(run, 500))) { fill(); return; }
+      for (const r of replies) if (!(await type(r, run, 900))) { fill(); return; }
+    },
+  };
+  const play = (view) => { scene += 1; if (!still) scenes[view]?.(scene); };
+
   // Demo: the panel's tabs, and "Find threads" pretending to scan.
   const tabs = document.querySelectorAll('.p-tabs [role="tab"]');
   const show = (view) => {
     for (const tab of tabs) tab.setAttribute('aria-selected', String(tab.dataset.view === view));
     for (const pane of document.querySelectorAll('[data-pane]')) pane.hidden = pane.dataset.pane !== view;
+    play(view);
   };
   // The tabs change by themselves every few seconds while the demo is on screen; the open card's bar shows the
   // time left. Pointing at the demo pauses it, and picking a tab or a card yourself stops it. Still for anyone
@@ -722,7 +849,7 @@ Disclosure, I make Acme Invoice, which sends those reminders for you. Happy to a
   const steps = document.querySelectorAll('.tour-step');
   const tourBox = document.querySelector('.tour');
   const order = [...steps].map((step) => step.dataset.view);
-  const STEP_MS = 4000;
+  const STEP_MS = 5500;
   let current = order[0];
   let elapsed = 0;
   let userPicked = false;
@@ -771,14 +898,14 @@ Disclosure, I make Acme Invoice, which sends those reminders for you. Happy to a
     }
   };
   setInterval(tick, 50);
-  document.getElementById('demo-scan').addEventListener('click', (event) => {
-    const button = event.currentTarget;
-    const status = document.getElementById('demo-status');
-    button.disabled = true;
-    button.textContent = 'Reading…';
-    status.textContent = 'Reading r/freelance (3 of 24)…';
-    setTimeout(() => { button.disabled = false; button.textContent = 'Find threads'; status.textContent = '14 threads worth a look, from 312 new posts'; }, 1400);
-  });
+  // The first scene plays once the demo first comes on screen.
+  const firstLook = new IntersectionObserver(([entry]) => {
+    if (!entry.isIntersecting) return;
+    firstLook.disconnect();
+    if (current === 'threads') play('threads');
+  }, { threshold: 0.3 });
+  firstLook.observe(document.querySelector('.browser'));
+  document.getElementById('demo-scan').addEventListener('click', () => { if (!still) play('threads'); });
 
   for (const chip of document.querySelectorAll('.badge.q')) {
     const why = chip.closest('.card').querySelector('.why');
