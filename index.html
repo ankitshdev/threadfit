@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ThreadFit for Reddit</title>
+  <meta name="description" content="A Chrome extension that finds Reddit threads where your product genuinely helps, and drafts replies you edit and post yourself. It never posts.">
+  <link rel="icon" href="icon.png">
+  <style>
+    :root { --text: #0d0f14; --muted: #4a4d5a; --line: #e2e3e9; --accent: #ea580c; --accent-text: #c2410c; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f7; color: var(--text); font: 16px/1.6 system-ui, -apple-system, 'Segoe UI', sans-serif; }
+    main { max-width: 1040px; margin: 0 auto; padding: 48px 20px 64px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; }
+    .brand img { width: 36px; height: 36px; }
+    h1 { margin: 32px 0 12px; max-width: 640px; font-size: clamp(32px, 6vw, 48px); line-height: 1.1; letter-spacing: -.03em; }
+    .lead { max-width: 620px; margin: 0 0 24px; color: var(--muted); font-size: 18px; }
+    ul { margin: 0 0 28px; padding: 0; list-style: none; display: grid; gap: 10px; }
+    li { display: flex; gap: 10px; align-items: baseline; color: var(--muted); }
+    li::before { content: '✓'; flex: none; display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 12px; font-weight: 700; }
+    .shot { display: block; width: 100%; margin-top: 36px; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 20px 50px rgba(15, 17, 25, .1); }
+    .note { margin-top: 28px; color: var(--muted); font-size: 14px; }
+    a { color: var(--accent-text); font-weight: 600; }
+    footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; display: flex; gap: 16px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+<main>
+  <div class="brand"><img src="icon.png" alt="">ThreadFit for Reddit</div>
+  <h1>Find the Reddit threads where your product fits</h1>
+  <p class="lead">A Chrome extension that reads your subreddits and Reddit search, ranks every thread by how likely a reply
+    is to land, and drafts a reply you edit and post yourself. It never posts for you.</p>
+  <ul>
+    <li>High intent: people asking for what you make, with the reasons each thread scored what it did</li>
+    <li>Drafts written only from the facts you give it, in your own voice</li>
+    <li>Subreddit rules checked before you reply or post, and a timer so you don't come across as spam</li>
+    <li>Mentions of your product and your competitors, tagged and sorted</li>
+    <li>Your data stays in your browser: no account, no server, no tracking</li>
+  </ul>
+  <img class="shot" src="screenshot.png" alt="The ThreadFit side panel listing Reddit threads with intent scores and a drafted reply">
+  <p class="note">ThreadFit is an independent tool, not made or endorsed by Reddit.</p>
+  <footer><a href="privacy.html">Privacy policy</a><a href="mailto:hello@overbid.in">hello@overbid.in</a></footer>
+</main>
+</body>
+</html>

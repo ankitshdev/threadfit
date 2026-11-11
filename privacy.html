@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ThreadFit for Reddit: privacy policy</title>
+  <meta name="description" content="What the ThreadFit Chrome extension does with your data: everything stays in your browser, and nothing is sent to the extension's maker.">
+  <style>
+    :root { --text: #0d0f14; --muted: #4a4d5a; --line: #e2e3e9; --accent: #c2410c; }
+    body { margin: 0; background: #fff; color: var(--text); font: 15px/1.65 system-ui, -apple-system, 'Segoe UI', sans-serif; }
+    main { max-width: 720px; margin: 0 auto; padding: 48px 20px 80px; }
+    h1 { margin: 0 0 4px; font-size: 30px; line-height: 1.2; letter-spacing: -.02em; }
+    h2 { margin: 32px 0 8px; font-size: 19px; }
+    p, li { color: var(--muted); }
+    .date { margin: 0 0 24px; font-size: 13px; }
+    ul { padding-left: 20px; }
+    li { margin-bottom: 6px; }
+    b { color: var(--text); }
+    a { color: var(--accent); }
+    .box { padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; }
+    .box p { margin: 0; color: var(--text); }
+  </style>
+</head>
+<body>
+<main>
+  <h1>ThreadFit for Reddit: privacy policy</h1>
+  <p class="date">Last updated 11 November 2026</p>
+
+  <div class="box"><p>In short: ThreadFit keeps everything in your own browser. It sends nothing to its maker, has no
+    accounts, no analytics and no tracking. It only talks to Reddit (through your own reddit.com tab), the AI service you
+    choose, and your website when you ask it to read it.</p></div>
+
+  <h2>What ThreadFit is</h2>
+  <p>ThreadFit is a Chrome extension that finds recent Reddit threads where your product could genuinely help, scores
+    them, and drafts replies for you to edit and post yourself. It never posts, comments or votes on Reddit.</p>
+
+  <h2>What it stores, and where</h2>
+  <p>Everything is kept in your browser's extension storage (<code>chrome.storage.local</code>) on your computer:</p>
+  <ul>
+    <li><b>Your setup:</b> your product's name, website, description and facts, the subreddits and searches to watch, and your settings.</li>
+    <li><b>Your AI keys:</b> the API keys you paste for Gemini, Groq or Claude.</li>
+    <li><b>Your work:</b> threads found by the last scans, threads you replied to, skipped or starred, your 👍 / 👎 ratings, and the last few replies you marked as posted (so drafts can match your voice).</li>
+  </ul>
+  <p>Removing the extension deletes all of it. "Forget what it learned" in the Overview clears the ratings and saved replies.</p>
+
+  <h2>Where data goes</h2>
+  <ul>
+    <li><b>Reddit.</b> ThreadFit reads public Reddit listings, searches, posts, comments and subreddit rules from inside your open reddit.com tab, with your own login, the same way the page itself does. It doesn't see or store your Reddit password.</li>
+    <li><b>The AI service you choose</b> (Google Gemini, Groq, or Anthropic Claude). When you ask for a draft, a rules check or a test, ThreadFit sends that service the Reddit text involved, your product details, and your API key, directly from your browser. During setup it also sends the text of your website so the AI can draft your product details. Each service handles that data under its own privacy policy and terms. ThreadFit only uses services you've added a key for.</li>
+    <li><b>Your website,</b> once, when you press "Fill it in from my site" on the setup page. Chrome asks your permission for that one site first.</li>
+  </ul>
+  <p>Nothing is sent to the maker of ThreadFit or to anyone else. There is no server, no account, no analytics and no advertising.</p>
+
+  <h2>What it doesn't do</h2>
+  <ul>
+    <li>It doesn't sell, rent or share your data.</li>
+    <li>It doesn't use your data for anything except the features you use, and never for advertising or credit decisions.</li>
+    <li>It doesn't read pages other than reddit.com, apart from your own website when you ask it to.</li>
+    <li>It doesn't post, comment, vote or send messages on Reddit.</li>
+  </ul>
+
+  <h2>Permissions, and why</h2>
+  <ul>
+    <li><b>Side panel:</b> ThreadFit opens beside the page you're on.</li>
+    <li><b>Storage:</b> keeps your setup and work in your browser.</li>
+    <li><b>Scripting and access to reddit.com:</b> Reddit only answers from inside a reddit.com tab, so ThreadFit reads listings there.</li>
+    <li><b>Access to the AI services' addresses:</b> to send your requests to the service you chose.</li>
+    <li><b>Alarms and notifications:</b> for the optional automatic scan and the timer between replies.</li>
+    <li><b>Optional access to other sites:</b> asked for only when you press "Fill it in from my site", and only for that site.</li>
+  </ul>
+
+  <h2>Not connected with Reddit</h2>
+  <p>ThreadFit is an independent tool. It isn't made, endorsed or sponsored by Reddit, Inc. Follow Reddit's rules and
+    each subreddit's rules when you post.</p>
+
+  <h2>Changes and contact</h2>
+  <p><a href="./">← ThreadFit for Reddit</a></p>
+  <p>If this policy changes, the new version will be posted here with a new date. Questions:
+    <a href="mailto:hello@overbid.in">hello@overbid.in</a>.</p>
+</main>
+</body>
+</html>
