@@ -162,6 +162,9 @@
     .p-tabs em { min-width: 18px; padding: 0 5px; border: 1px solid var(--line-hi); border-radius: 999px; color: var(--muted); font-size: 10px; font-style: normal; line-height: 15px; text-align: center; }
     .p-tabs button[aria-selected="true"] em { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
     .p-body { flex: 1; overflow-y: auto; padding: 12px; }
+    .p-body [data-pane]:not([hidden]) { animation: pane-in .35s ease; }
+    @keyframes pane-in { from { opacity: 0; transform: translateY(4px); } }
+    @media (prefers-reduced-motion: reduce) { .p-body [data-pane] { animation: none !important; } }
     .p-body h3 { font-size: 16px; letter-spacing: -.02em; }
     .p-body .sub { margin: 2px 0 10px; color: var(--muted); font-size: 12px; }
     .p-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
@@ -623,7 +626,26 @@ Disclosure, I make Acme Invoice, which sends those reminders for you. Happy to a
     for (const tab of tabs) tab.setAttribute('aria-selected', String(tab.dataset.view === view));
     for (const pane of document.querySelectorAll('[data-pane]')) pane.hidden = pane.dataset.pane !== view;
   };
-  for (const tab of tabs) tab.addEventListener('click', () => show(tab.dataset.view));
+  // The tabs change by themselves every few seconds while the demo is on screen; pointing at it pauses them, and
+  // picking a tab yourself stops them. Still for anyone who asks for less motion.
+  let userPicked = false;
+  for (const tab of tabs) tab.addEventListener('click', (event) => { if (event.isTrusted) userPicked = true; show(tab.dataset.view); });
+  const demoBox = document.querySelector('.browser');
+  let hovering = false;
+  let visible = false;
+  demoBox.addEventListener('mouseenter', () => { hovering = true; });
+  demoBox.addEventListener('mouseleave', () => { hovering = false; });
+  demoBox.addEventListener('focusin', () => { hovering = true; });
+  demoBox.addEventListener('focusout', () => { hovering = false; });
+  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }, { threshold: 0.15 }).observe(demoBox);
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const order = [...tabs].map((tab) => tab.dataset.view);
+    setInterval(() => {
+      if (userPicked || hovering || !visible || document.hidden) return;
+      const now = order.findIndex((view) => document.querySelector(`.p-tabs [data-view="${view}"]`).getAttribute('aria-selected') === 'true');
+      show(order[(now + 1) % order.length]);
+    }, 4000);
+  }
   document.getElementById('demo-scan').addEventListener('click', (event) => {
     const button = event.currentTarget;
     const status = document.getElementById('demo-status');
