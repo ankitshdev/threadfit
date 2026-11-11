@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex">
+  <title>ThreadFit share card</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Geist:wght@500;600;700;800&display=block" rel="stylesheet">
+  <style>
+    /* The 1200x630 picture shown when the site's link is shared: the logo, a browser window holding a real
+       screenshot of the home page, and handwritten notes around it. python og-src/make.py saves it as og.png. */
+    :root { --text: #171717; --accent: #f45b16; --muted: #737782; --line: #eaeaea; }
+    * { box-sizing: border-box; margin: 0; }
+    body { position: relative; width: 1200px; height: 630px; overflow: hidden; background: #fff; color: var(--text); font-family: Geist, sans-serif; }
+    body::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 1px 1px, #e2dfdc 1.2px, transparent 0) 0 0 / 26px 26px; opacity: .8; }
+    body::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 40%, rgb(244 91 22 / .07)); pointer-events: none; }
+
+    /* Title */
+    .title { position: absolute; z-index: 1; top: 24px; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; }
+    .word { display: flex; align-items: center; gap: 18px; font: 800 84px/1 Geist, sans-serif; letter-spacing: -.055em; }
+    .word img { width: 74px; height: 74px; }
+    .tag { margin-top: 12px; color: var(--muted); font-size: 15px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+    .tag i { color: var(--accent); font-style: normal; }
+
+    /* Handwritten notes */
+    .note { position: absolute; z-index: 2; color: var(--text); font: 700 27px/1.02 'Caveat', cursive; text-align: center; }
+    .note svg { position: absolute; fill: none; stroke: var(--text); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .n1 { top: 36px; left: 52px; transform: rotate(-7deg); }
+    .n1 svg { top: 62px; left: 104px; width: 52px; height: 52px; }
+    .n2 { top: 40px; right: 46px; transform: rotate(6deg); }
+    .n2 svg { top: 64px; left: 14px; width: 50px; height: 54px; }
+    .n3 { bottom: 46px; left: 20px; width: 100px; transform: rotate(-6deg); }
+    .n3 svg { top: -56px; left: 44px; width: 46px; height: 50px; }
+    .n4 { bottom: 46px; right: 18px; width: 100px; transform: rotate(5deg); }
+    .n4 svg { top: -60px; left: 22px; width: 46px; height: 54px; }
+    .spark { position: absolute; width: 22px; height: 6px; border-radius: 3px; background: var(--accent); opacity: .8; }
+
+    /* The browser window, holding a real screenshot of the home page. */
+    .win { position: absolute; z-index: 1; top: 168px; left: 128px; right: 128px; bottom: -30px; border: 1px solid var(--line); border-radius: 22px; background: #fff; box-shadow: 0 30px 70px rgb(60 30 10 / .14), 0 0 0 8px rgb(255 255 255 / .6); overflow: hidden; }
+    .chrome { display: flex; align-items: center; gap: 7px; height: 34px; padding: 0 16px; border-bottom: 1px solid var(--line); background: #f7f7f8; }
+    .chrome i { width: 10px; height: 10px; border-radius: 50%; background: #dedee2; }
+    .chrome span { margin: 0 auto; padding: 4px 60px; border-radius: 8px; background: #fff; color: var(--muted); font-size: 12px; font-weight: 600; }
+    .page { display: block; width: 100%; }
+  </style>
+</head>
+<body>
+  <div class="title">
+    <div class="word"><img src="../icon.png" alt="">ThreadFit</div>
+    <p class="tag">Find customers on Reddit. <i>Not just conversations.</i></p>
+  </div>
+
+  <p class="note n1">Finds buyers<br>on Reddit<svg viewBox="0 0 56 58"><path d="M4 4c10 18 22 34 44 46"/><path d="M36 50l12 0-4-12"/></svg></p>
+  <p class="note n2">Scores buying<br>intent<svg viewBox="0 0 54 60"><path d="M48 4C36 20 22 36 8 50"/><path d="M8 38l0 12 12-2"/></svg></p>
+  <p class="note n3">Free,<br>your own<br>AI key<svg viewBox="0 0 46 50"><path d="M8 46C14 30 24 16 40 6"/><path d="M28 6l12 0-2 12"/></svg></p>
+  <p class="note n4">Never<br>posts<br>for you<svg viewBox="0 0 46 54"><path d="M36 50C28 34 20 20 8 6"/><path d="M8 18l0-12 12 2"/></svg></p>
+  <i class="spark" style="top: 60px; left: 300px; transform: rotate(-35deg)"></i>
+  <i class="spark" style="top: 94px; left: 284px; transform: rotate(8deg)"></i>
+  <i class="spark" style="top: 62px; right: 296px; transform: rotate(35deg)"></i>
+  <i class="spark" style="top: 96px; right: 282px; transform: rotate(-8deg)"></i>
+
+  <div class="win">
+    <div class="chrome"><i></i><i></i><i></i><span>ankitshdev.github.io/threadfit</span></div>
+    <img class="page" src="home.png" alt="">
+  </div>
+</body>
+</html>
