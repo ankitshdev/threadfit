@@ -114,7 +114,7 @@
     .pill b::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
     .hero h1 { max-width: 940px; margin: 0 auto; font-size: clamp(40px, 6.6vw, 76px); font-weight: 800; letter-spacing: -.055em; line-height: 1.04; }
     .hero h1 .chip { display: inline-flex; align-items: center; gap: .14em; margin: .04em .02em; padding: .02em .16em .06em .1em; border: 2px solid color-mix(in srgb, var(--accent) 45%, transparent); border-radius: .2em; background: color-mix(in srgb, var(--accent) 8%, var(--bg)); color: var(--accent); vertical-align: baseline; }
-    .hero h1 .chip img { width: .78em; height: .78em; border-radius: .2em; }
+    .hero h1 .chip svg { width: .74em; height: .74em; flex: none; }
     .hero h1 .grad { display: block; padding-bottom: .06em; background: linear-gradient(90deg, #e2470b, #f45b16 45%, #fb923c); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .hero h1 em { font-style: normal; color: var(--accent-text); }
     .hero .lead { max-width: 580px; margin: 20px auto 0; color: var(--muted); font-size: clamp(16px, 1.8vw, 18px); line-height: 1.6; }
@@ -356,7 +356,7 @@
   <section class="hero">
     <div class="wrap">
       <div class="pill"><b>Chrome extension</b> for founders and marketers</div>
-      <h1>Find customers on <span class="chip"><img src="icon.png" alt="">Reddit</span>. <span class="grad">Not just conversations.</span></h1>
+      <h1>Find customers on <span class="chip"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor"/><g fill="#fff"><circle cx="4.9" cy="9.7" r="1.5"/><circle cx="15.1" cy="9.7" r="1.5"/><ellipse cx="10" cy="11.9" rx="5.7" ry="3.9"/><circle cx="14.4" cy="4.7" r="1.15"/></g><path d="M10 8 11 4.3l3.4.4" fill="none" stroke="#fff" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"/><g fill="currentColor"><circle cx="7.9" cy="11.3" r=".95"/><circle cx="12.1" cy="11.3" r=".95"/></g><path d="M7.8 13.5q2.2 1.4 4.4 0" fill="none" stroke="currentColor" stroke-width=".8" stroke-linecap="round"/></svg>Reddit</span>. <span class="grad">Not just conversations.</span></h1>
       <p class="lead">ThreadFit finds the discussions where people ask for what you make, scores each one for buying intent, and drafts an honest, AI-assisted reply that you edit and post yourself.</p>
       <div class="cta-row">
         <a class="btn get" href="#get">Add to Chrome — Free</a>
