@@ -28,7 +28,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
     // Light or dark before the page draws: your pick, else the system's.
     try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch {}
@@ -105,17 +105,26 @@
     .icon-btn:hover { color: var(--text); }
 
     /* ---- Hero */
-    .hero { position: relative; padding: 96px 0 40px; text-align: center; }
+    .hero { position: relative; padding: 104px 0 40px; text-align: center; isolation: isolate; }
+    .hero::before { content: ''; position: absolute; inset: 0 0 auto; height: 760px; z-index: -1; pointer-events: none;
+      background: linear-gradient(105deg, transparent 35%, color-mix(in srgb, var(--accent) 7%, transparent) 100%),
+        linear-gradient(to bottom, transparent 70%, var(--bg)); }
     .pill { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px; padding: 4px 12px 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--muted); font-size: 13px; font-weight: 500; }
     .pill b { display: inline-flex; align-items: center; gap: 6px; color: var(--accent-text); font-weight: 600; }
     .pill b::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-    .hero h1 { max-width: 760px; margin: 0 auto; font-size: clamp(36px, 5.4vw, 58px); font-weight: 600; letter-spacing: -.045em; line-height: 1.06; }
-    .hero h1 span { display: block; color: var(--faint); }
+    .hero h1 { max-width: 940px; margin: 0 auto; font-size: clamp(40px, 6.6vw, 76px); font-weight: 800; letter-spacing: -.055em; line-height: 1.04; }
+    .hero h1 .chip { display: inline-flex; align-items: center; gap: .14em; margin: .04em .02em; padding: .02em .16em .06em .1em; border: 2px solid color-mix(in srgb, var(--accent) 45%, transparent); border-radius: .2em; background: color-mix(in srgb, var(--accent) 8%, var(--bg)); color: var(--accent); vertical-align: baseline; }
+    .hero h1 .chip img { width: .78em; height: .78em; border-radius: .2em; }
+    .hero h1 .grad { display: block; padding-bottom: .06em; background: linear-gradient(90deg, #e2470b, #f45b16 45%, #fb923c); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .hero h1 em { font-style: normal; color: var(--accent-text); }
     .hero .lead { max-width: 580px; margin: 20px auto 0; color: var(--muted); font-size: clamp(16px, 1.8vw, 18px); line-height: 1.6; }
     .cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 30px; }
-    .micro { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin-top: 18px; color: var(--muted); font-size: 13.5px; }
-    .micro span::before { content: '✓'; margin-right: 6px; color: var(--accent); font-weight: 700; }
+    .hero .cta-row .btn { padding: 12px 24px; border-radius: 999px; font-size: 15px; }
+    .hero .cta-row .btn.get { box-shadow: 0 1px 2px rgba(23, 23, 23, .08), 0 8px 20px color-mix(in srgb, var(--accent) 22%, transparent); }
+    .hero .cta-row .btn.get::after { content: '→'; transition: transform .15s; }
+    .hero .cta-row .btn.get:hover::after { transform: translateX(3px); }
+    .micro { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 0; margin-top: 16px; color: var(--faint); font-size: 13px; }
+    .micro span + span::before { content: '·'; margin: 0 8px; }
 
     /* ---- Demo: the real thing, a side panel beside your reddit.com tab, with made-up data */
     .demo { margin-top: 64px; }
@@ -319,6 +328,8 @@
       .final .box { padding: 48px 20px; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    .nav .btn { border-radius: 999px; }
+    @media (max-width: 640px) { .micro { gap: 4px 14px; } .micro span + span::before { content: none; } }
   </style>
 </head>
 <body>
@@ -345,13 +356,13 @@
   <section class="hero">
     <div class="wrap">
       <div class="pill"><b>Chrome extension</b> for founders and marketers</div>
-      <h1>Find customers on Reddit. <span>Not just conversations.</span></h1>
+      <h1>Find customers on <span class="chip"><img src="icon.png" alt="">Reddit</span>. <span class="grad">Not just conversations.</span></h1>
       <p class="lead">ThreadFit finds the discussions where people ask for what you make, scores each one for buying intent, and drafts an honest, AI-assisted reply that you edit and post yourself.</p>
       <div class="cta-row">
         <a class="btn get" href="#get">Add to Chrome — Free</a>
         <a class="btn ghost" href="#demo">Explore the demo</a>
       </div>
-      <div class="micro"><span>Free</span><span>Your own AI key, free tiers work</span><span>Never posts for you</span><span>Data stays in your browser</span></div>
+      <div class="micro"><span>Free, no subscription</span><span>Your own AI key</span><span>Never posts for you</span><span>Data stays in your browser</span></div>
 
       <!-- A clickable demo of the real thing: ThreadFit's side panel beside a reddit.com tab, with a made-up product. -->
       <div class="demo" id="demo">
