@@ -28,7 +28,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
     // Light or dark before the page draws: your pick, else the system's.
     try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch {}
@@ -36,94 +36,91 @@
   <style>
     :root {
       color-scheme: light;
-      --bg: #ffffff; --bg-2: #f6f6f8; --surface: #ffffff; --surface-2: #f3f4f6;
-      --text: #0b0c10; --muted: #4b4f5c; --faint: #7a7e8c; --line: #e5e6eb; --line-hi: #d2d4dc;
-      --accent: #ea580c; --accent-hover: #c2410c; --accent-text: #c2410c; --on-accent: #fff;
+      --bg: #ffffff; --bg-2: #fafafa; --surface: #ffffff; --surface-2: #f6f6f7;
+      --text: #171717; --muted: #737782; --faint: #9a9da6; --line: #eaeaea; --line-hi: #dededf;
+      --accent: #f45b16; --accent-hover: #dd4b0a; --accent-text: #d9480f; --on-accent: #fff;
       --good: #15803d; --good-bg: #ecfdf3; --good-line: #a7e3bf;
       --warn: #a15c07; --warn-bg: #fff8eb; --warn-line: #f1d39a;
       --bad: #c81e1e; --bad-bg: #fef1f1; --bad-line: #f5c0c0;
-      --ink: #0b0c10; --on-ink: #fff;
-      --shadow: 0 1px 2px rgba(12, 14, 20, .05), 0 8px 24px rgba(12, 14, 20, .06);
-      --shadow-lg: 0 30px 80px rgba(12, 14, 20, .14);
+      --ink: #171717; --on-ink: #fff;
+      --shadow: 0 1px 2px rgba(23, 23, 23, .04);
+      --shadow-lg: 0 1px 2px rgba(23, 23, 23, .04), 0 16px 40px rgba(23, 23, 23, .07);
     }
     :root[data-theme="dark"] {
       color-scheme: dark;
-      --bg: #0a0b0f; --bg-2: #0f1117; --surface: #13161d; --surface-2: #1a1e27;
-      --text: #f2f3f6; --muted: #a8acb9; --faint: #757a8a; --line: #232733; --line-hi: #343a49;
-      --accent: #f97316; --accent-hover: #fb8a3c; --accent-text: #fb923c;
+      --bg: #0a0a0a; --bg-2: #0f0f10; --surface: #121213; --surface-2: #19191b;
+      --text: #ededed; --muted: #9a9da6; --faint: #6e717b; --line: #232326; --line-hi: #2f2f33;
+      --accent: #f4621f; --accent-hover: #f77a3f; --accent-text: #fb8a54;
       --good: #34d399; --good-bg: rgba(52, 211, 153, .1); --good-line: rgba(52, 211, 153, .35);
       --warn: #fbbf24; --warn-bg: rgba(251, 191, 36, .1); --warn-line: rgba(251, 191, 36, .35);
       --bad: #f87171; --bad-bg: rgba(248, 113, 113, .1); --bad-line: rgba(248, 113, 113, .35);
-      --ink: #f2f3f6; --on-ink: #0b0c10;
-      --shadow: none; --shadow-lg: 0 30px 80px rgba(0, 0, 0, .55);
+      --ink: #ededed; --on-ink: #0a0a0a;
+      --shadow: none; --shadow-lg: 0 16px 40px rgba(0, 0, 0, .45);
     }
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme="light"]) {
         color-scheme: dark;
-        --bg: #0a0b0f; --bg-2: #0f1117; --surface: #13161d; --surface-2: #1a1e27;
-        --text: #f2f3f6; --muted: #a8acb9; --faint: #757a8a; --line: #232733; --line-hi: #343a49;
-        --accent: #f97316; --accent-hover: #fb8a3c; --accent-text: #fb923c;
+        --bg: #0a0a0a; --bg-2: #0f0f10; --surface: #121213; --surface-2: #19191b;
+        --text: #ededed; --muted: #9a9da6; --faint: #6e717b; --line: #232326; --line-hi: #2f2f33;
+        --accent: #f4621f; --accent-hover: #f77a3f; --accent-text: #fb8a54;
         --good: #34d399; --good-bg: rgba(52, 211, 153, .1); --good-line: rgba(52, 211, 153, .35);
         --warn: #fbbf24; --warn-bg: rgba(251, 191, 36, .1); --warn-line: rgba(251, 191, 36, .35);
         --bad: #f87171; --bad-bg: rgba(248, 113, 113, .1); --bad-line: rgba(248, 113, 113, .35);
-        --ink: #f2f3f6; --on-ink: #0b0c10;
-        --shadow: none; --shadow-lg: 0 30px 80px rgba(0, 0, 0, .55);
+        --ink: #ededed; --on-ink: #0a0a0a;
+        --shadow: none; --shadow-lg: 0 16px 40px rgba(0, 0, 0, .45);
       }
     }
 
     * { box-sizing: border-box; }
     [hidden] { display: none !important; }
     html { scroll-behavior: smooth; scroll-padding-top: 72px; }
-    body { margin: 0; overflow-x: clip; background: var(--bg); color: var(--text); font: 16px/1.6 Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; -webkit-font-smoothing: antialiased; }
+    body { margin: 0; overflow-x: clip; background: var(--bg); color: var(--text); font: 16px/1.6 Geist, Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; -webkit-font-smoothing: antialiased; }
     a { color: inherit; }
     img { max-width: 100%; }
     .wrap { width: min(1120px, 100% - 40px); margin: 0 auto; }
-    h1, h2, h3 { margin: 0; letter-spacing: -.03em; line-height: 1.1; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px; color: var(--accent-text); font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
-    .section { padding: 96px 0; }
+    h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -.035em; line-height: 1.12; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px; color: var(--accent-text); font-size: 13px; font-weight: 500; }
+    .section { padding: 88px 0; }
     .section.alt { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .head { max-width: 680px; margin: 0 auto 48px; text-align: center; }
-    .head h2 { font-size: clamp(30px, 4.4vw, 44px); }
-    .head p { margin: 14px 0 0; color: var(--muted); font-size: 18px; }
+    .head { max-width: 640px; margin: 0 auto 44px; text-align: center; }
+    .head h2 { font-size: clamp(28px, 3.6vw, 38px); }
+    .head p { margin: 12px 0 0; color: var(--muted); font-size: 17px; }
 
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border: 1px solid var(--accent); border-radius: 10px; background: var(--accent); color: var(--on-accent); font: inherit; font-size: 15px; font-weight: 700; text-decoration: none; white-space: nowrap; cursor: pointer; transition: background .15s, border-color .15s, transform .15s; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 18px; border: 1px solid var(--accent); border-radius: 8px; background: var(--accent); color: var(--on-accent); font: inherit; font-size: 14.5px; font-weight: 600; text-decoration: none; white-space: nowrap; cursor: pointer; transition: background .15s, border-color .15s, transform .15s; }
     .btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
     .btn:active { transform: translateY(1px); }
     .btn.ghost { background: var(--surface); border-color: var(--line-hi); color: var(--text); }
     .btn.ghost:hover { border-color: var(--faint); background: var(--surface-2); }
-    .btn.small { padding: 8px 14px; font-size: 14px; }
+    .btn.small { padding: 7px 13px; font-size: 13.5px; }
 
     /* ---- Nav */
     .nav { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid var(--line); }
     .nav .wrap { display: flex; align-items: center; gap: 28px; height: 64px; }
-    .logo { display: inline-flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 800; letter-spacing: -.02em; text-decoration: none; }
-    .logo img { width: 30px; height: 30px; }
+    .logo { display: inline-flex; align-items: center; gap: 9px; font-size: 16px; font-weight: 600; letter-spacing: -.02em; text-decoration: none; }
+    .logo img { width: 26px; height: 26px; }
     .nav-links { display: flex; gap: 24px; margin-right: auto; }
-    .nav-links a { color: var(--muted); font-size: 14.5px; font-weight: 500; text-decoration: none; }
+    .nav-links a { color: var(--muted); font-size: 14px; font-weight: 500; text-decoration: none; }
     .nav-links a:hover { color: var(--text); }
-    .icon-btn { display: inline-grid; place-items: center; width: 38px; height: 38px; border: 1px solid var(--line-hi); border-radius: 10px; background: var(--surface); color: var(--muted); cursor: pointer; }
+    .icon-btn { display: inline-grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--muted); cursor: pointer; }
     .icon-btn:hover { color: var(--text); }
 
     /* ---- Hero */
-    .hero { position: relative; padding: 88px 0 40px; text-align: center; }
-    .hero::before { content: ''; position: absolute; inset: 0 0 auto; height: 620px; z-index: -1; background:
-      radial-gradient(600px 300px at 50% 0, color-mix(in srgb, var(--accent) 18%, transparent), transparent 70%),
-      linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 48px 48px,
-      linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 48px 48px;
-      mask-image: linear-gradient(#000 0%, transparent 85%); opacity: .7; }
-    .pill { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 22px; padding: 6px 14px 6px 8px; border: 1px solid var(--line-hi); border-radius: 999px; background: var(--surface); color: var(--muted); font-size: 13.5px; font-weight: 500; }
-    .pill b { padding: 2px 8px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-size: 12px; }
-    .hero h1 { max-width: 880px; margin: 0 auto; font-size: clamp(38px, 6.6vw, 68px); font-weight: 800; }
+    .hero { position: relative; padding: 96px 0 40px; text-align: center; }
+    .pill { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px; padding: 4px 12px 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--muted); font-size: 13px; font-weight: 500; }
+    .pill b { display: inline-flex; align-items: center; gap: 6px; color: var(--accent-text); font-weight: 600; }
+    .pill b::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .hero h1 { max-width: 760px; margin: 0 auto; font-size: clamp(36px, 5.4vw, 58px); font-weight: 600; letter-spacing: -.045em; line-height: 1.06; }
+    .hero h1 span { display: block; color: var(--faint); }
     .hero h1 em { font-style: normal; color: var(--accent-text); }
-    .hero .lead { max-width: 640px; margin: 22px auto 0; color: var(--muted); font-size: clamp(17px, 2vw, 19.5px); }
-    .cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; }
-    .micro { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; margin-top: 18px; color: var(--faint); font-size: 14px; }
-    .micro span::before { content: '✓'; margin-right: 6px; color: var(--good); font-weight: 800; }
+    .hero .lead { max-width: 580px; margin: 20px auto 0; color: var(--muted); font-size: clamp(16px, 1.8vw, 18px); line-height: 1.6; }
+    .cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 30px; }
+    .micro { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin-top: 18px; color: var(--muted); font-size: 13.5px; }
+    .micro span::before { content: '✓'; margin-right: 6px; color: var(--accent); font-weight: 700; }
 
     /* ---- Demo: the real thing, a side panel beside your reddit.com tab, with made-up data */
-    .demo { margin-top: 56px; }
-    .demo-note { margin-bottom: 14px; color: var(--faint); font-size: 14px; }
-    .browser { max-width: 1060px; margin: 0 auto; overflow: hidden; border: 1px solid var(--line-hi); border-radius: 16px; background: var(--surface); box-shadow: var(--shadow-lg); text-align: left; }
+    .demo { margin-top: 64px; }
+    .demo-note { margin-top: 14px; color: var(--faint); font-size: 13px; }
+    .browser { max-width: 1060px; margin: 0 auto; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-lg); text-align: left; }
     .chrome { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--surface-2); }
     .dots { display: flex; gap: 6px; }
     .dots i { width: 11px; height: 11px; border-radius: 50%; background: var(--line-hi); }
@@ -137,7 +134,7 @@
     .page .post small { display: block; margin-bottom: 6px; color: var(--faint); font-size: 12px; }
     .page .post b { display: block; font-size: 15px; line-height: 1.35; }
     .line { height: 8px; margin-top: 9px; border-radius: 4px; background: var(--line); }
-    .page .post.lit { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent); }
+    .page .post.lit { border-color: var(--accent); }
 
     /* The panel, drawn like ThreadFit's own. */
     .panel { display: flex; flex-direction: column; min-width: 0; background: var(--bg); font-size: 13px; line-height: 1.5; }
@@ -159,7 +156,7 @@
     .p-body h3 { font-size: 16px; letter-spacing: -.02em; }
     .p-body .sub { margin: 2px 0 10px; color: var(--muted); font-size: 12px; }
     .p-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-    .p-btn { padding: 6px 11px; border: 1px solid var(--accent); border-radius: 8px; background: var(--accent); color: var(--on-accent); font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; }
+    .p-btn { padding: 6px 11px; border: 1px solid var(--accent); border-radius: 7px; background: var(--accent); color: var(--on-accent); font: inherit; font-size: 12px; font-weight: 600; white-space: nowrap; cursor: pointer; }
     .p-bar span { color: var(--faint); font-size: 11.5px; }
     .p-filters { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
     .p-filters span { padding: 2px 9px; border: 1px solid var(--line-hi); border-radius: 999px; color: var(--muted); font-size: 11px; font-weight: 600; }
@@ -171,7 +168,10 @@
     .card .snip { margin-top: 4px; color: var(--muted); font-size: 12px; font-weight: 400; }
     .card .why { margin-top: 7px; padding: 6px 8px; border-radius: 7px; background: var(--surface-2); color: var(--muted); font-size: 11px; font-weight: 400; }
     .card .fitl { margin-top: 7px; color: var(--muted); font-size: 11.5px; font-weight: 400; }
-    .card .rules { margin-top: 4px; color: var(--faint); font-size: 11px; font-weight: 400; }
+    .card .rules { margin-top: 4px; color: var(--warn); font-size: 11px; font-weight: 400; text-decoration: underline dotted; text-underline-offset: 3px; }
+    .card .lead-line, .lead-line { margin: 0 0 10px; color: var(--muted); font-size: 12px; }
+    .badge.q { cursor: pointer; }
+    .badge.q::after { content: '?'; display: inline-grid; place-items: center; width: 10px; height: 10px; border: 1px solid currentColor; border-radius: 50%; font-size: 8px; line-height: 1; }
     .card details { margin-top: 7px; }
     .card summary { color: var(--accent-text); font-size: 12px; font-weight: 700; cursor: pointer; list-style: none; }
     .card summary::-webkit-details-marker { display: none; }
@@ -181,7 +181,7 @@
     .acts { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
     .mini { padding: 3px 9px; border: 1px solid var(--line-hi); border-radius: 7px; background: var(--surface); color: var(--text); font: inherit; font-size: 11px; font-weight: 600; cursor: pointer; }
     .mini.solid { border-color: var(--accent); background: var(--accent); color: var(--on-accent); }
-    .row-acts { display: flex; gap: 12px; margin-top: 8px; padding-top: 7px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11.5px; font-weight: 600; }
+    .row-acts { display: flex; flex-wrap: wrap; gap: 4px 12px; white-space: nowrap; margin-top: 8px; padding-top: 7px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11.5px; font-weight: 600; }
     .row-acts span:last-child { margin-left: auto; filter: grayscale(1); opacity: .6; }
     .badge { display: inline-flex; align-items: center; gap: 4px; padding: 0 7px; border: 1px solid; border-radius: 999px; font-size: 10.5px; font-weight: 700; line-height: 17px; }
     .badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
@@ -215,82 +215,83 @@
 
     /* ---- Features */
     .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .feature { padding: 26px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); box-shadow: var(--shadow); }
-    .feature .ic { display: grid; place-items: center; width: 42px; height: 42px; margin-bottom: 16px; border-radius: 11px; background: var(--accent); color: var(--on-accent); }
-    .feature h3 { font-size: 18px; letter-spacing: -.02em; }
-    .feature p { margin: 8px 0 0; color: var(--muted); font-size: 15px; }
+    .feature { padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); transition: border-color .15s; }
+    .feature:hover { border-color: var(--line-hi); }
+    .feature .ic { display: grid; place-items: center; width: 36px; height: 36px; margin-bottom: 16px; border: 1px solid var(--line); border-radius: 9px; background: var(--bg-2); color: var(--accent); }
+    .feature h3 { font-size: 16px; letter-spacing: -.02em; }
+    .feature p { margin: 6px 0 0; color: var(--muted); font-size: 14.5px; }
 
     /* ---- Steps */
     .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; counter-reset: step; }
-    .step { position: relative; padding: 28px 26px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
-    .step::before { counter-increment: step; content: counter(step); display: grid; place-items: center; width: 36px; height: 36px; margin-bottom: 18px; border-radius: 50%; background: var(--ink); color: var(--on-ink); font-weight: 800; }
-    .step h3 { font-size: 18px; }
-    .step p { margin: 8px 0 0; color: var(--muted); font-size: 15px; }
+    .step { position: relative; padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+    .step::before { counter-increment: step; content: counter(step); display: grid; place-items: center; width: 28px; height: 28px; margin-bottom: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg-2); color: var(--accent-text); font-size: 13px; font-weight: 600; }
+    .step h3 { font-size: 16px; }
+    .step p { margin: 6px 0 0; color: var(--muted); font-size: 14.5px; }
     .step small { display: block; margin-top: 12px; color: var(--faint); font-size: 13px; }
 
     /* ---- Audience */
     .aud { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    .aud div { padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
-    .aud h3 { font-size: 17px; }
+    .aud div { padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+    .aud h3 { font-size: 16px; }
     .aud p { margin: 8px 0 0; color: var(--muted); font-size: 14.5px; }
 
     /* ---- Safety */
     .safe { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-    .safe h2 { font-size: clamp(30px, 4vw, 42px); }
+    .safe h2 { font-size: clamp(28px, 3.4vw, 36px); }
     .safe > div > p { color: var(--muted); font-size: 17px; }
     .checks { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
-    .checks li { display: flex; gap: 12px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
-    .checks li::before { content: '✓'; flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--good-bg); border: 1px solid var(--good-line); color: var(--good); font-size: 13px; font-weight: 800; }
-    .checks b { display: block; font-size: 15.5px; }
+    .checks li { display: flex; gap: 12px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+    .checks li::before { content: '✓'; flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg-2); color: var(--accent); font-size: 12px; font-weight: 700; }
+    .checks b { display: block; font-size: 15px; font-weight: 600; }
     .checks span { color: var(--muted); font-size: 14.5px; }
 
     /* ---- Comparison */
-    .compare { width: 100%; border-collapse: separate; border-spacing: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); font-size: 15px; }
+    .compare { width: 100%; border-collapse: separate; border-spacing: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); font-size: 15px; }
     .compare th, .compare td { padding: 14px 18px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
     .compare tr:last-child td { border-bottom: 0; }
-    .compare thead th { background: var(--surface-2); color: var(--muted); font-size: 13px; font-weight: 700; }
-    .compare thead th.us { background: var(--accent); color: var(--on-accent); }
-    .compare td.us { background: color-mix(in srgb, var(--accent) 7%, transparent); font-weight: 600; }
-    .compare td:first-child { color: var(--muted); font-weight: 600; }
+    .compare thead th { background: var(--bg-2); color: var(--muted); font-size: 13px; font-weight: 600; }
+    .compare thead th.us { color: var(--accent-text); box-shadow: inset 0 2px 0 var(--accent); }
+    .compare td.us { background: var(--bg-2); font-weight: 600; }
+    .compare td:first-child { color: var(--muted); font-weight: 500; }
     .y::before { content: '✓ '; color: var(--good); font-weight: 800; }
     .n::before { content: '✕ '; color: var(--bad); font-weight: 800; }
     .n { color: var(--faint); }
 
     /* ---- Pricing */
-    .price { max-width: 520px; margin: 0 auto; padding: 34px; border: 2px solid var(--accent); border-radius: 20px; background: var(--surface); box-shadow: var(--shadow-lg); text-align: center; }
-    .price .tag-top { display: inline-block; margin-bottom: 14px; padding: 3px 12px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-size: 12.5px; font-weight: 700; }
-    .price .amount { font-size: 56px; font-weight: 800; letter-spacing: -.04em; line-height: 1; }
+    .price { max-width: 480px; margin: 0 auto; padding: 32px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-lg); text-align: center; }
+    .price .tag-top { display: inline-block; margin-bottom: 14px; padding: 2px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--accent-text); font-size: 12.5px; font-weight: 500; }
+    .price .amount { font-size: 48px; font-weight: 600; letter-spacing: -.04em; line-height: 1; }
     .price .amount small { color: var(--faint); font-size: 18px; font-weight: 600; letter-spacing: 0; }
     .price > p { margin: 12px 0 22px; color: var(--muted); }
     .price ul { margin: 0 0 26px; padding: 0; list-style: none; text-align: left; display: grid; gap: 10px; }
-    .price li { display: flex; gap: 10px; font-size: 15px; }
-    .price li::before { content: '✓'; color: var(--good); font-weight: 800; }
+    .price li { display: flex; gap: 10px; font-size: 14.5px; }
+    .price li::before { content: '✓'; color: var(--accent); font-weight: 700; }
     .price .btn { width: 100%; }
     .price .fine { margin: 14px 0 0; color: var(--faint); font-size: 13px; }
 
     /* ---- Privacy */
     .privacy { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .privacy div { padding: 24px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
-    .privacy h3 { font-size: 17px; }
+    .privacy div { padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+    .privacy h3 { font-size: 16px; }
     .privacy p { margin: 8px 0 0; color: var(--muted); font-size: 14.5px; }
 
     /* ---- FAQ */
     .faq { max-width: 760px; margin: 0 auto; display: grid; gap: 10px; }
-    .faq details { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
-    .faq summary { display: flex; justify-content: space-between; gap: 16px; padding: 18px 20px; font-weight: 700; cursor: pointer; list-style: none; }
+    .faq details { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+    .faq summary { display: flex; justify-content: space-between; gap: 16px; padding: 16px 20px; font-weight: 600; cursor: pointer; list-style: none; }
     .faq summary::-webkit-details-marker { display: none; }
     .faq summary::after { content: '+'; color: var(--faint); font-size: 22px; font-weight: 400; line-height: 1; transition: transform .2s; }
     .faq details[open] summary::after { transform: rotate(45deg); }
-    .faq details p { margin: 0; padding: 0 20px 18px; color: var(--muted); font-size: 15.5px; }
+    .faq details p { margin: 0; padding: 0 20px 16px; color: var(--muted); font-size: 15px; }
 
     /* ---- Final call */
     .final { padding: 0 0 96px; }
-    .final .box { position: relative; overflow: hidden; padding: 64px 32px; border-radius: 24px; background: #0b0c10; color: #fff; text-align: center; }
-    .final .box::before { content: ''; position: absolute; inset: auto -20% -60% -20%; height: 120%; background: radial-gradient(closest-side, rgba(249, 115, 22, .45), transparent); }
-    .final h2 { position: relative; font-size: clamp(30px, 4.6vw, 46px); }
-    .final p { position: relative; max-width: 560px; margin: 14px auto 28px; color: #b9bcc8; font-size: 18px; }
+    .final .box { position: relative; overflow: hidden; padding: 64px 32px; border: 1px solid var(--line); border-radius: 16px; background: #171717; color: #fff; text-align: center; }
+    .final h2 { position: relative; font-size: clamp(28px, 3.8vw, 40px); }
+    .final p { position: relative; max-width: 520px; margin: 12px auto 28px; color: #a3a3a3; font-size: 17px; }
     .final .cta-row { position: relative; margin: 0; }
-    .final .btn.ghost { background: transparent; border-color: #3a3f4d; color: #fff; }
+    .final .btn.ghost { background: transparent; border-color: #3a3a3a; color: #fff; }
+    .final .btn.ghost:hover { background: #222; border-color: #555; }
     #get-note { position: relative; margin-top: 18px; color: #b9bcc8; font-size: 14px; }
 
     footer { padding: 40px 0 56px; border-top: 1px solid var(--line); color: var(--faint); font-size: 14px; }
@@ -335,7 +336,7 @@
     <button class="icon-btn" id="theme" type="button" aria-label="Switch light or dark" title="Light or dark">
       <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
     </button>
-    <a class="btn small get" href="#get">Add to Chrome, free</a>
+    <a class="btn small get" href="#get">Add to Chrome — Free</a>
   </div>
 </header>
 
@@ -343,18 +344,17 @@
   <!-- Hero -->
   <section class="hero">
     <div class="wrap">
-      <div class="pill"><b>New</b> A Chrome extension for founders and marketers</div>
-      <h1>Find customers on Reddit, <em>without being the spammer</em></h1>
-      <p class="lead">ThreadFit finds the Reddit threads where people are asking for what you make, scores how likely a reply is to land, and drafts an honest answer you edit and post yourself.</p>
+      <div class="pill"><b>Chrome extension</b> for founders and marketers</div>
+      <h1>Find customers on Reddit. <span>Not just conversations.</span></h1>
+      <p class="lead">ThreadFit finds the discussions where people ask for what you make, scores each one for buying intent, and drafts an honest, AI-assisted reply that you edit and post yourself.</p>
       <div class="cta-row">
-        <a class="btn get" href="#get">Add to Chrome, free</a>
-        <a class="btn ghost" href="#demo">Try the demo ↓</a>
+        <a class="btn get" href="#get">Add to Chrome — Free</a>
+        <a class="btn ghost" href="#demo">Explore the demo</a>
       </div>
       <div class="micro"><span>Free</span><span>Your own AI key, free tiers work</span><span>Never posts for you</span><span>Data stays in your browser</span></div>
 
       <!-- A clickable demo of the real thing: ThreadFit's side panel beside a reddit.com tab, with a made-up product. -->
       <div class="demo" id="demo">
-        <p class="demo-note">Click the panel's tabs: ThreadFit's side panel with a made-up product, not a video.</p>
         <div class="browser">
           <div class="chrome">
             <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -383,35 +383,32 @@
               </div>
               <div class="p-body">
                 <div data-pane="threads">
-                  <h3>Opportunities</h3><p class="sub">Fresh threads where Acme Invoice could genuinely help.</p>
-                  <div class="p-bar"><button type="button" class="p-btn" id="demo-scan">Find threads</button><span id="demo-status">14 threads worth a look, from 312 new posts</span></div>
+                                    <div class="p-bar"><button type="button" class="p-btn" id="demo-scan">Find threads</button><span id="demo-status">14 threads worth a look, from 312 new posts</span></div>
                   <div class="p-filters"><span>All 14</span><span>High intent 4</span><span>Medium 6</span><span>Low 4</span></div>
-                  <div class="card"><div class="meta"><span class="badge high">High intent 91</span><b>r/freelance</b> · 1 h ago · 3 comments</div>
+                  <div class="card"><div class="meta"><span class="badge high q" role="button" tabindex="0" title="Why this score?">High intent 91</span><b>r/freelance</b> · 1 h ago · 3 comments</div>
                     <p>What do you use to send invoices and chase late payments?</p>
-                    <div class="why"><b>Why 91:</b> asks about invoices, posted in the last 6 hours, only 3 comments, so a reply gets seen.</div>
+                    <div class="why" hidden><b>Why 91:</b> asks about invoices, posted in the last 6 hours, only 3 comments, so a reply gets seen.</div>
                     <div class="fitl"><span class="fit good">Good fit</span> they want invoicing with reminders</div>
-                    <div class="rules">Rules: no links in comments; disclose your own product.</div>
+                    <div class="rules" title="No links in comments. Disclose your own product.">Rules: No links · Disclose your product</div>
                     <details open><summary>Draft a reply</summary>
                       <textarea readonly>Two things helped me with late payers: a clear due date on the invoice itself, and a polite reminder on day 3 and day 10 so it never feels personal.
 
 Disclosure, I make Acme Invoice, which sends those reminders for you. Happy to answer questions.</textarea>
                       <div class="acts"><span class="mini solid">Write with AI</span><span class="mini">Copy</span><span class="mini">Template</span><span class="mini">Open thread</span></div>
-                    </details><div class="row-acts"><span>I replied</span><span>Skip</span><span>☆ Star</span><span>👍 👎</span></div></div>
-                  <div class="card"><div class="meta"><span class="badge med">Medium 58</span><b>r/consulting</b> · 4 h ago · 12 comments</div>
+                    </details><div class="row-acts"><span>I replied</span><span>Skip</span><span>Projects</span><span>☆ Star</span><span>👍 👎</span></div></div>
+                  <div class="card"><div class="meta"><span class="badge med q" role="button" tabindex="0" title="Why this score?">Medium intent 58</span><b>r/consulting</b> · 4 h ago · 12 comments</div>
                     <p>Year one as a solo consultant: what I'd do differently</p>
-                    <div class="why">About invoicing but not asking for a tool, so Medium at most.</div><div class="row-acts"><span>I replied</span><span>Skip</span><span>☆ Star</span><span>👍 👎</span></div></div>
+                    <div class="why" hidden><b>Why 58:</b> about invoicing but not asking for a tool, so Medium at most.</div><div class="row-acts"><span>I replied</span><span>Skip</span><span>Projects</span><span>☆ Star</span><span>👍 👎</span></div></div>
                 </div>
 
                 <div data-pane="search" hidden>
-                  <h3>Search discussions</h3><p class="sub">Any phrase across Reddit, last month, scored the same way.</p>
-                  <div class="search"><span>gst invoice software</span><button type="button" class="p-btn">Search</button></div>
+                                    <div class="search"><span>gst invoice software</span><button type="button" class="p-btn">Search</button></div>
                   <div class="card"><div class="meta"><span class="badge high">High intent 84</span><b>r/IndiaBusiness</b> · 2 d ago · 6 comments</div><p>Recommend an invoicing app that handles GST?</p></div>
                   <div class="card"><div class="meta"><span class="badge med">Medium 49</span><b>r/smallbusiness</b> · 9 d ago · 21 comments</div><p>Switched from spreadsheets to proper invoicing, worth it?</p></div>
                 </div>
 
                 <div data-pane="mentions" hidden>
-                  <h3>Mentions</h3><p class="sub">What people say about Acme Invoice and its competitors this month.</p>
-                  <div class="card"><div class="h4" style="margin-top:0">Brand mentions</div>
+                                    <div class="card"><div class="h4" style="margin-top:0">Brand mentions</div>
                     <div class="bar-row"><span>Rival One</span><span class="track"><i style="width:100%"></i></span><b>4</b></div>
                     <div class="bar-row"><span>Rival Two</span><span class="track"><i style="width:50%"></i></span><b>2</b></div>
                     <div class="bar-row"><span>Rival Three</span><span class="track"><i style="width:25%"></i></span><b>1</b></div>
@@ -422,7 +419,7 @@ Disclosure, I make Acme Invoice, which sends those reminders for you. Happy to a
                 </div>
 
                 <div data-pane="post" hidden>
-                  <h3>Write a post</h3><p class="sub">Where a post about Acme Invoice can stay up, written to each subreddit's rules.</p>
+                  <p class="lead-line">Subreddits where a post about Acme Invoice can stay up.</p>
                   <div class="card"><div class="meta"><b>r/SideProject</b> · posts allowed</div>
                     <div class="fitl"><span class="fit good">Good fit</span> a place for sharing what you built</div><div class="acts"><span class="mini solid">Write a post</span></div></div>
                   <div class="card"><div class="meta"><b>r/freelance</b> · rules to check</div>
@@ -432,8 +429,8 @@ Disclosure, I make Acme Invoice, which sends those reminders for you. Happy to a
                 </div>
 
                 <div data-pane="mine" hidden>
-                  <h3>This post</h3><p class="sub">Your open post: a reply drafted for each comment.</p>
-                  <div class="card"><div class="meta"><b>r/SideProject</b> · your post · 7 comments</div><p>I built a simple invoicing tool for freelancers</p>
+                  <p class="lead-line">Open a post on reddit.com, then draft replies to it and its comments.</p>
+                  <div class="card"><div class="meta"><b>r/SideProject</b> · the post open in this tab · 7 comments</div><p>I built a simple invoicing tool for freelancers</p>
                     <div class="comment"><b>u/maker_one</b> <span class="fit good">Good fit</span> <span style="color:var(--muted)">has a project</span><div class="c">Nice. I'm building a time tracker for designers, could pair well.</div><div class="r">Nice, time tracking and invoicing do go together. What do you use to export hours today?</div></div>
                     <div class="comment"><b>u/curious_dev</b> <span class="fit maybe">Maybe</span> <span style="color:var(--muted)">asks a question</span><div class="c">Does it handle GST?</div><div class="r">Yes, it adds GST to each line. Happy to show you how it looks.</div></div>
                   </div>
@@ -442,6 +439,7 @@ Disclosure, I make Acme Invoice, which sends those reminders for you. Happy to a
             </div>
           </div>
         </div>
+        <p class="demo-note">A working copy of ThreadFit's side panel with a made-up product. Click the tabs and the scores.</p>
       </div>
     </div>
   </section>
@@ -539,7 +537,7 @@ Disclosure, I make Acme Invoice, which sends those reminders for you. Happy to a
           <li>Post writer and comment replies</li>
           <li>Automatic scans and notifications</li>
         </ul>
-        <a class="btn get" href="#get">Add to Chrome, free</a>
+        <a class="btn get" href="#get">Add to Chrome — Free</a>
         <p class="fine">No account, no card, no tracking.</p>
       </div>
     </div>
@@ -581,8 +579,8 @@ Disclosure, I make Acme Invoice, which sends those reminders for you. Happy to a
         <p>Find the thread, answer it well, and post it yourself.</p>
         <div class="cta-row">
           <!-- When the store listing is live, put its address in data-store on <body> and these buttons go there. -->
-          <a class="btn get" href="#get">Add to Chrome, free</a>
-          <a class="btn ghost" href="#demo">See the demo</a>
+          <a class="btn get" href="#get">Add to Chrome — Free</a>
+          <a class="btn ghost" href="#demo">Explore the demo</a>
         </div>
         <p id="get-note">Coming soon to the Chrome Web Store. Want to know when it's live? <a href="mailto:hello@overbid.in?subject=ThreadFit%20launch" style="color:#fff">Email us</a>.</p>
       </div>
@@ -623,6 +621,14 @@ Disclosure, I make Acme Invoice, which sends those reminders for you. Happy to a
     status.textContent = 'Reading r/freelance (3 of 24)…';
     setTimeout(() => { button.disabled = false; button.textContent = 'Find threads'; status.textContent = '14 threads worth a look, from 312 new posts'; }, 1400);
   });
+
+  for (const chip of document.querySelectorAll('.badge.q')) {
+    const why = chip.closest('.card').querySelector('.why');
+    const toggle = () => { why.hidden = !why.hidden; };
+    chip.addEventListener('click', toggle);
+    chip.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggle(); } });
+  }
+  document.querySelector('.badge.q').click();
 
   // Light or dark.
   document.getElementById('theme').addEventListener('click', () => {
