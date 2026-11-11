@@ -32,6 +32,7 @@
   <script>
     // Light or dark before the page draws: your pick, else the system's.
     try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch {}
+    if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('reveal-on');
   </script>
   <style>
     :root {
@@ -369,6 +370,24 @@
       .founder blockquote p { font-size: 16px; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    /* ---- Scroll motion: headings and cards rise into place as they come on screen, a row one after another. */
+    .reveal-on .rv { opacity: 0; transform: translateY(22px); transition: opacity .7s cubic-bezier(.2, .7, .2, 1), transform .7s cubic-bezier(.2, .7, .2, 1); transition-delay: calc(var(--i, 0) * 90ms); }
+    .reveal-on .rv.in { opacity: 1; transform: none; }
+    .reveal-on .rv.zoom { transform: translateY(28px) scale(.97); }
+    .reveal-on .rv.zoom.in { transform: none; }
+    .reveal-on .why-card.rv .why-n { display: inline-block; transform: translateY(10px); opacity: 0; transition: inherit; transition-delay: calc(var(--i, 0) * 90ms + 200ms); }
+    .reveal-on .why-card.rv.in .why-n { transform: none; opacity: 1; }
+    .reveal-on .checks li.rv { transform: translateX(-18px); }
+    .reveal-on .checks li.rv.in { transform: none; }
+    /* The hero itself arrives on load. */
+    .reveal-on .hero .pill, .reveal-on .hero h1, .reveal-on .hero .lead, .reveal-on .hero .cta-row, .reveal-on .hero .micro, .reveal-on .hero .demo { animation: rise .8s cubic-bezier(.2, .7, .2, 1) both; }
+    .reveal-on .hero h1 { animation-delay: .08s; }
+    .reveal-on .hero .lead { animation-delay: .18s; }
+    .reveal-on .hero .cta-row { animation-delay: .26s; }
+    .reveal-on .hero .micro { animation-delay: .34s; }
+    .reveal-on .hero .demo { animation-delay: .45s; animation-duration: 1s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(16px); } }
     .nav .btn { border-radius: 999px; }
     @media (max-width: 640px) { .micro { gap: 4px 14px; } .micro span + span::before { content: none; } }
   </style>
@@ -768,6 +787,32 @@ Disclosure, I make Acme Invoice, which sends those reminders for you. Happy to a
     chip.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggle(); } });
   }
   document.querySelector('.badge.q').click();
+
+  // Scroll motion: what to animate, each row's cards numbered so they arrive one after another.
+  if (document.documentElement.classList.contains('reveal-on')) {
+    const groups = [
+      ['.section .head, .safe > div:first-child, .works', ''],
+      ['.why-card', ''], ['.feature', ''], ['.step', ''], ['.aud > div', ''], ['.checks li', ''],
+      ['.privacy > div', ''], ['.faq details', ''],
+      ['.compare, .price, .founder, .final .box', 'zoom'],
+    ];
+    const watch = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.add('in');
+        watch.unobserve(entry.target);
+      }
+    }, { threshold: 0, rootMargin: '0px 0px -60px 0px' });
+    for (const [selector, extra] of groups) {
+      for (const el of document.querySelectorAll(selector)) {
+        el.classList.add('rv');
+        if (extra) el.classList.add(extra);
+        const siblings = [...el.parentElement.children].filter((child) => child.matches(selector));
+        el.style.setProperty('--i', String(Math.min(siblings.indexOf(el), 6)));
+        watch.observe(el);
+      }
+    }
+  }
 
   // Light or dark.
   document.getElementById('theme').addEventListener('click', () => {
